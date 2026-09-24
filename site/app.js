@@ -470,4 +470,26 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#lightbox").hidden = true; });
 
+// ------------------------------------------------------------------ tema
+// Ciclo: automático (según el sistema) → claro → oscuro.
+const THEMES = [
+  { id: "", icon: "🌓", label: "Tema automático" },
+  { id: "light", icon: "☀️", label: "Tema claro" },
+  { id: "dark", icon: "🌙", label: "Tema oscuro" },
+];
+function applyTheme(id) {
+  const t = THEMES.find((x) => x.id === id) || THEMES[0];
+  if (t.id) document.documentElement.dataset.theme = t.id;
+  else delete document.documentElement.dataset.theme;
+  const btn = $("#theme");
+  btn.textContent = t.icon;
+  btn.title = `${t.label} (clic para cambiar)`;
+  try { t.id ? localStorage.setItem("theme", t.id) : localStorage.removeItem("theme"); } catch { /* sin almacenamiento */ }
+}
+applyTheme(document.documentElement.dataset.theme || "");
+$("#theme").addEventListener("click", () => {
+  const cur = document.documentElement.dataset.theme || "";
+  applyTheme(THEMES[(THEMES.findIndex((x) => x.id === cur) + 1) % THEMES.length].id);
+});
+
 init();

@@ -12,7 +12,7 @@ caja, cartucho, capturas y ficha detallada de cada juego y sus lanzamientos por 
   (en español cuando existe).
 - **Lanzamientos por región**: título local, fecha, editor, código de producto (SNS-/SNSP-/SHVC-),
   idiomas, tamaño de ROM y CRC32.
-- Búsqueda, filtros (región, género, año, editor, chip, jugadores, con escaneo de cartucho),
+- Modo claro, oscuro o automático. Búsqueda, filtros (región, género, año, editor, chip, jugadores, con escaneo de cartucho),
   orden, juego al azar y URLs compartibles.
 
 ## Estructura
