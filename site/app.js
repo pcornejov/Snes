@@ -10,6 +10,7 @@ const REGION_TAG_ES = {
   Brazil: "Brasil", Netherlands: "Países Bajos", Sweden: "Suecia", Scandinavia: "Escandinavia",
   UK: "Reino Unido", Asia: "Asia",
 };
+const regionEs = (tag) => tag.split(",").map((r) => REGION_TAG_ES[r.trim()] || r.trim()).join(", ");
 const MONTHS = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
   "septiembre", "octubre", "noviembre", "diciembre"];
 const SCAN_LABEL = {
@@ -306,7 +307,7 @@ function showDetail(g) {
       <div class="table-wrap"><table>
         <thead><tr><th>Región</th><th>Título</th><th>Fecha</th><th>Editor</th><th>Código</th><th>Idiomas</th><th>ROM</th><th>CRC32</th></tr></thead>
         <tbody>${g.variants.map((v) => `<tr>
-          <td>${esc(v.region.split(",").map((r) => REGION_TAG_ES[r.trim()] || r).join(", "))}</td>
+          <td>${esc(regionEs(v.region))}</td>
           <td>${esc(v.title)}${v.rev ? ` <small>(${esc(v.rev)})</small>` : ""}</td>
           <td>${v.month ? `${MONTHS[+v.month]} ` : ""}${v.year || "—"}</td>
           <td>${esc(v.publisher || "—")}</td>
@@ -348,7 +349,7 @@ function buildGallery(g) {
   const seen = new Set();
   for (const v of g.variants) {
     if (!has(v, "b")) continue;
-    const label = REGION_TAG_ES[v.region] || v.region;
+    const label = regionEs(v.region);
     if (seen.has(label) && v.region !== "USA") continue;
     seen.add(label);
     boxes.push(figure(thumbUrl(v, "b"), null, `Caja · ${label}${v.title !== g.title ? ` — ${v.title}` : ""}`));
@@ -371,7 +372,7 @@ function buildGallery(g) {
   // Pantallas de título y logos.
   const screens = [];
   for (const v of g.variants) {
-    if (has(v, "t")) screens.push(figure(thumbUrl(v, "t"), null, `Pantalla de título · ${REGION_TAG_ES[v.region] || v.region}`, "px"));
+    if (has(v, "t")) screens.push(figure(thumbUrl(v, "t"), null, `Pantalla de título · ${regionEs(v.region)}`, "px"));
   }
   const logo = g.variants.find((v) => has(v, "l"));
   if (logo) screens.push(figure(thumbUrl(logo, "l"), null, "Logo", "logo"));
@@ -380,7 +381,7 @@ function buildGallery(g) {
   if (!tabs.length) tabs.push({ label: "Sin imágenes", html: `<p class="muted">No hay imágenes disponibles para este juego.</p>` });
 
   const shots = g.variants.filter((v) => has(v, "s"))
-    .map((v) => figure(thumbUrl(v, "s"), null, `Captura · ${REGION_TAG_ES[v.region] || v.region}`, "px")).slice(0, 4).join("");
+    .map((v) => figure(thumbUrl(v, "s"), null, `Captura · ${regionEs(v.region)}`, "px")).slice(0, 4).join("");
   return { tabs, shots };
 }
 
