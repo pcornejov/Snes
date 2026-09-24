@@ -1,0 +1,5 @@
+# Cabeceras para Cloudflare Pages (GitHub Pages ignora este archivo).
+/scans/*
+  Cache-Control: public, max-age=31536000, immutable
+/data/*
+  Cache-Control: public, max-age=3600

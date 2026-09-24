@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo Super Nintendo</title>
+  <meta name="description" content="Catálogo de juegos de Super Nintendo / Super Famicom con cajas, cartuchos y fichas detalladas por región.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#/" aria-label="Inicio">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="brand-text">SUPER&nbsp;NINTENDO<small>Catálogo completo</small></span>
+    </a>
+    <div class="search">
+      <input id="q" type="search" placeholder="Buscar juego, desarrollador, editor…" autocomplete="off" aria-label="Buscar">
+    </div>
+  </header>
+
+  <main id="view-list">
+    <section class="filters" aria-label="Filtros">
+      <div class="chips" id="region-chips" role="group" aria-label="Región"></div>
+      <select id="f-genre" aria-label="Género"><option value="">Todos los géneros</option></select>
+      <select id="f-year" aria-label="Año"><option value="">Todos los años</option></select>
+      <select id="f-publisher" aria-label="Editor"><option value="">Todos los editores</option></select>
+      <select id="f-chip" aria-label="Chip"><option value="">Cualquier chip</option></select>
+      <select id="f-players" aria-label="Jugadores"><option value="">Jugadores</option></select>
+      <label class="check"><input type="checkbox" id="f-cart"> Con escaneo de cartucho</label>
+      <select id="sort" aria-label="Orden">
+        <option value="title">A → Z</option>
+        <option value="-title">Z → A</option>
+        <option value="year">Más antiguos</option>
+        <option value="-year">Más recientes</option>
+      </select>
+      <button id="random" class="btn" type="button" title="Juego al azar">🎲 Al azar</button>
+    </section>
+    <p class="count" id="count" aria-live="polite">Cargando catálogo…</p>
+    <div class="grid" id="grid"></div>
+    <button id="more" class="btn more" type="button" hidden>Mostrar más</button>
+  </main>
+
+  <main id="view-detail" hidden></main>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lb-close" type="button" aria-label="Cerrar">✕</button>
+    <img alt="">
+    <p class="lb-caption"></p>
+  </div>
+
+  <footer class="foot">
+    <p>Datos: <a href="https://github.com/libretro/libretro-database">libretro-database</a> ·
+      Imágenes: <a href="https://github.com/libretro-thumbnails/Nintendo_-_Super_Nintendo_Entertainment_System">libretro-thumbnails</a> y
+      <a href="https://archive.org/details/near-snes-scans-png">escaneos de Near (archive.org)</a> ·
+      Fichas: <a href="https://www.wikidata.org">Wikidata</a> / Wikipedia.
+      <span id="generated"></span></p>
+    <p class="muted">Proyecto de fans sin fines de lucro. Super Nintendo es marca registrada de Nintendo.</p>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
